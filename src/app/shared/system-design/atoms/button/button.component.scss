@@ -1,0 +1,104 @@
+:host {
+    width: var(--width);
+    outline: none;
+}
+
+.button {
+    padding: 8px 18px;
+    border-radius: 32px;
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    color: var(--white-950);
+    font-size: .875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    width: var(--width);
+    outline: 2px transparent solid;
+    outline-offset: 4px;
+    text-wrap: nowrap;
+    transition: background-color .2s ease, outline-color .15s ease;
+
+    &[disabled] {
+        cursor: not-allowed;
+    }
+
+    &:focus-visible {
+        outline-color: var(--purple-500);
+    }
+
+    &--action {
+        background-color: var(--purple-500);
+
+        @media (hover:hover) {
+            &:hover {
+                background-color: var(--purple-400);
+            }
+        }
+    }
+
+    &--square {
+        background-color: #ffffff1a;
+        border: solid 1px #ffffff33;
+        backdrop-filter: blur(2px);
+
+        @media (hover:hover) {
+            &:hover {
+                background-color: #ffffff42;
+            }
+        }
+    }
+
+    &--outline {
+        outline: solid 1px var(--neutral-800);
+        outline-offset: -1px;
+        color: var(--neutral-800);
+
+        @media (hover:hover) {
+            &:hover {
+                background-color: var(--neutral-50);
+            }
+        }
+
+
+        &:focus-visible {
+            background-color: var(--neutral-50);
+            outline-color: var(--neutral-800);
+        }
+
+    }
+
+    &--danger {
+        background-color: var(--red-500);
+        color: var(--white-900);
+
+
+        @media (hover:hover) {
+            &:hover {
+                background-color: var(--red-400);
+            }
+        }
+
+        &:focus-visible {
+            outline-color: var(--red-500);
+        }
+    }
+
+    &--success {
+        background-color: var(--green-500);
+        color: var(--white-900);
+
+
+        @media (hover:hover) {
+            &:hover {
+                background-color: var(--green-400);
+            }
+        }
+
+        &:focus-visible {
+            outline-color: var(--green-500);
+        }
+    }
+}

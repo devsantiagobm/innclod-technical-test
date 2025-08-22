@@ -1,0 +1,30 @@
+<main class="login">
+    <section class="login__card" @fade-in>
+
+        <header class="login__header">
+            <h1 id="login-title" class="login__title">Iniciar Sesión</h1>
+            <p class="login__subtitle">Accede con tus credenciales</p>
+        </header>
+
+        <form class="login__form" [formGroup]="form" (ngSubmit)="login()">
+            <fieldset class="login__fieldset">
+                <atom-input label="Correo electrónico" name="email" placeholder="Ingresa tu correo"
+                    [control]="form.controls.email" type="email" [isRequired]="true">
+                </atom-input>
+
+                <atom-input label="Contraseña" name="password" placeholder="Ingresa tu contraseña"
+                    [control]="form.controls.password" type="password" [isRequired]="true">
+                </atom-input>
+            </fieldset>
+
+            <atom-button variant="action" type="submit" [isLoading]="isLoadingRequest">Ingresar</atom-button>
+        </form>
+
+        <footer class="login__footer">
+            <span href="#" class="login__link">¿Olvidaste tu contraseña? Nosotros también :( </span>
+            <hr class="login__divider">
+            <p class="login__demo">Demo: Puedes iniciar sesión con cualquier correo y contraseña </p>
+        </footer>
+
+    </section>
+</main>
