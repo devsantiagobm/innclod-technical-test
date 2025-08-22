@@ -1,0 +1,60 @@
+.modal {
+    position: fixed;
+    inset: 0;
+    background-color: color-mix(in srgb, var(--neutral-50), transparent 50%);
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    backdrop-filter: blur(4px);
+    will-change: backdrop-filter;
+
+    &__content {
+        width: clamp(300px, 30dvw, 500px);
+        box-shadow: 0 8px 32px -16px color-mix(in srgb, var(--neutral-900), transparent 75%);
+        background-color: var(--neutral-0);
+        padding: 24px;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+
+        justify-content: space-between;
+    }
+
+    &__description {
+        color: var(--neutral-500);
+        font-size: .9rem;
+    }
+
+    &__button-close {
+        padding: 5px;
+        aspect-ratio: 1;
+        background-color: var(--neutral-100);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color .2s ease;
+
+        @media (hover:hover) {
+            &:hover {
+                background-color: var(--neutral-200);
+
+            }
+        }
+    }
+
+    &__title {
+        font-weight: var(--font-weight-semibold);
+    }
+
+    &__actions {
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end;
+        align-items: center;
+    }
+}

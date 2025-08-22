@@ -1,1 +1,118 @@
-<p>projects-list works!</p>
+<main class="projects">
+    <header class="projects__header">
+
+        <div class="projects__header-box">
+            <h1 class="projects__title">Proyectos</h1>
+            <p class="projects__welcome">Bienvenido, {{ userEmail }}</p>
+        </div>
+
+        <div class="projects__actions">
+            <atom-button variant="action" (click)="setFormState(true)">
+                <lucide-icon name="plus" size="16"></lucide-icon>
+                Nuevo proyecto
+            </atom-button>
+
+            <!-- TODO cerrar sesion -->
+            <atom-button variant="danger">
+                Cerrar sesión
+            </atom-button>
+        </div>
+    </header>
+
+    <div class="projects__loader" *ngIf="isLoading">
+        <atom-loader [size]="32"></atom-loader>
+    </div>
+
+    <section class="projects__grid">
+        <article class="projects__card" *ngFor="let project of projects" @fade-in>
+
+            <header class="projects__card-header">
+                <h2 class="projects__card-row projects__card-title">
+                    <lucide-icon name="building-2"></lucide-icon>
+                    {{ project.name }}
+                </h2>
+
+                <p class="projects__card-description">
+                    {{project.company.catchPhrase}}
+                </p>
+            </header>
+
+            <div class="projects__metadata">
+                <p class="projects__card-row">
+                    <lucide-icon name="mail" size="18"></lucide-icon>
+                    {{ project.email }}
+                </p>
+
+                <p class="projects__card-row">
+                    <lucide-icon name="phone" size="18"></lucide-icon>
+                    {{ project.phone }}
+                </p>
+
+                <p class="projects__card-row">
+                    <lucide-icon name="globe" size="18"></lucide-icon>
+                    {{ project.website }}
+                </p>
+            </div>
+
+            <footer class="projects__card-footer">
+                <button class="projects__card-button projects__card-button--tasks">
+                    <lucide-icon name="eye" size="18"></lucide-icon>
+                    Ver tareas
+                </button>
+
+                <button class="projects__card-button" (click)="setFormState(project.id)">
+                    <lucide-icon name="pencil" size="16"></lucide-icon>
+                </button>
+
+                <button class="projects__card-button" (click)="setDeletingProjectId(project.id)">
+                    <lucide-icon name="trash" size="16"></lucide-icon>
+                </button>
+            </footer>
+        </article>
+    </section>
+
+    <molecule-modal [isVisible]="shouldShowForm" (close)="setFormState(null)">
+        <ng-container modal-title>{{formTexts.title}}</ng-container>
+        <ng-container modal-description> {{formTexts.description}} </ng-container>
+
+        <ng-container modal-body>
+            <form class="projects__form" [formGroup]="form" (ngSubmit)="saveProject()">
+                <fieldset class="projects__fieldset">
+                    <atom-input label="Título" name="title" placeholder="Título del proyecto"
+                        [control]="form.controls.title" type="text" [isRequired]="true">
+                    </atom-input>
+
+                    <atom-input label="Correo electrónico" name="email" placeholder="Ingresa el correo"
+                        [control]="form.controls.email" type="email" [isRequired]="true">
+                    </atom-input>
+
+                    <atom-input label="Página web" name="website" placeholder="https://example.com"
+                        [control]="form.controls.website" type="url" [isRequired]="true">
+                    </atom-input>
+
+                    <atom-input label="Teléfono" name="phone" placeholder="+57 300 000 0000"
+                        [control]="form.controls.phone" type="tel" [isRequired]="true">
+                    </atom-input>
+                </fieldset>
+
+                <atom-button variant="action" type="submit" [isLoading]="isLoadingRequest">
+                    Guardar Proyecto
+                </atom-button>
+            </form>
+
+        </ng-container>
+    </molecule-modal>
+
+    <molecule-modal [isVisible]="shouldShowDeleteModal" (close)="setDeletingProjectId(null)">
+        <ng-container modal-title>¿Eliminar proyecto?</ng-container>
+        <ng-container modal-description>
+            Esta acción no se puede deshacer. El proyecto y toda su información se eliminarán de forma permanente
+        </ng-container>
+
+        <ng-container modal-actions>
+            <atom-button variant="danger" (click)="deleteProject()" [isLoading]="isLoadingRequest">Eliminar proyecto</atom-button>
+            <atom-button variant="outline" [fitContent]="true" (click)="setDeletingProjectId(null)">Cancelar</atom-button>
+        </ng-container>
+    </molecule-modal>
+
+</main>
