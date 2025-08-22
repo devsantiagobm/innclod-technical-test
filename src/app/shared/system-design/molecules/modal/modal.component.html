@@ -1,0 +1,27 @@
+<ng-container>
+    <div class="modal" @modal *ngIf="isVisible" (click)="closeModal()">
+        <section class="modal__content" (click)="$event.stopPropagation()">
+            <header class="modal__header">
+                <h3 class="modal__title">
+                    <ng-content select="[modal-title]"></ng-content>
+                </h3>
+
+                <button class="modal__button-close" (click)="closeModal()">
+                    <lucide-icon name="x" size="15"></lucide-icon>
+                </button>
+            </header>
+
+            <p class="modal__description">
+                <ng-content select="[modal-description]" />
+            </p>
+
+            <div class="modal__body">
+                <ng-content select="[modal-body]" />
+            </div>
+
+            <div class="modal__actions">
+                <ng-content select="[modal-actions]" />
+            </div>
+        </section>
+    </div>
+</ng-container>

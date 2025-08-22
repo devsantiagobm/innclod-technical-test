@@ -5,7 +5,8 @@ import { InputComponent } from './atoms/input/input.component';
 import { LoaderComponent } from './atoms/loader/loader.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Eye, EyeOff, LucideAngularModule } from 'lucide-angular';
+import { Eye, EyeOff, LucideAngularModule, X } from 'lucide-angular';
+import { ModalComponent } from './molecules/modal/modal.component';
 
 
 
@@ -13,18 +14,20 @@ import { Eye, EyeOff, LucideAngularModule } from 'lucide-angular';
   declarations: [
     ButtonComponent,
     InputComponent,
-    LoaderComponent
+    LoaderComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
     PipesModule,
-    LucideAngularModule.pick({ Eye, EyeOff }),
+    LucideAngularModule.pick({ Eye, EyeOff, X }),
     ReactiveFormsModule
   ],
   exports: [
     ButtonComponent,
     InputComponent,
-    LoaderComponent
+    LoaderComponent,
+    ModalComponent
   ]
 })
 export class SystemDesignModule { }
