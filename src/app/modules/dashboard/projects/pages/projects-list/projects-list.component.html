@@ -1,5 +1,5 @@
 <main class="projects">
-    <header class="projects__header">
+    <header class="projects__header" @fade-in>
 
         <div class="projects__header-box">
             <h1 class="projects__title">Proyectos</h1>
@@ -12,8 +12,7 @@
                 Nuevo proyecto
             </atom-button>
 
-            <!-- TODO cerrar sesion -->
-            <atom-button variant="danger">
+            <atom-button variant="danger" (click)="logout()">
                 Cerrar sesión
             </atom-button>
         </div>
@@ -55,10 +54,10 @@
             </div>
 
             <footer class="projects__card-footer">
-                <button class="projects__card-button projects__card-button--tasks">
+                <a class="projects__card-button projects__card-button--tasks" [routerLink]="project.id + '/tasks'">
                     <lucide-icon name="eye" size="18"></lucide-icon>
                     Ver tareas
-                </button>
+                </a>
 
                 <button class="projects__card-button" (click)="setFormState(project.id)">
                     <lucide-icon name="pencil" size="16"></lucide-icon>
@@ -110,8 +109,10 @@
         </ng-container>
 
         <ng-container modal-actions>
-            <atom-button variant="danger" (click)="deleteProject()" [isLoading]="isLoadingRequest">Eliminar proyecto</atom-button>
-            <atom-button variant="outline" [fitContent]="true" (click)="setDeletingProjectId(null)">Cancelar</atom-button>
+            <atom-button variant="danger" (click)="deleteProject()" [isLoading]="isLoadingRequest">Eliminar
+                proyecto</atom-button>
+            <atom-button variant="outline" [fitContent]="true"
+                (click)="setDeletingProjectId(null)">Cancelar</atom-button>
         </ng-container>
     </molecule-modal>
 

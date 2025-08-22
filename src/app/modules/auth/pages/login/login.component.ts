@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { toast } from 'ngx-sonner';
 
 
-// TODO SERVICIO GENERICO PARA LOS ERRORES HTPP
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',

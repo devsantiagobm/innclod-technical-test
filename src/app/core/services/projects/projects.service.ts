@@ -15,6 +15,10 @@ export class ProjectsService {
     return this.http.get<Project[]>(`${this.baseUrl}/users`);
   }
 
+  public getProjectById(id: number): Observable<Project> {
+    return this.http.get<Project>(`${this.baseUrl}/users/${id}`);
+  }
+
   public createProject(project: Partial<Project>): Observable<Project> {
     return this.http.post<Project>(`${this.baseUrl}/users`, project);
   }
