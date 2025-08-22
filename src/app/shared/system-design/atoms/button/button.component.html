@@ -1,0 +1,18 @@
+<ng-template #content>
+    <ng-content></ng-content>
+</ng-template>
+
+<button [type]="type" *ngIf="!routerLink" [class]="'button button--' + variant"
+    [disabled]="disabled || isLoading">
+
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+
+    <ng-container *ngIf="isLoading">
+        <atom-loader [size]="18" />
+    </ng-container>
+</button>
+
+<!-- <a *ngIf="routerLink" [class]="'button button--' + variant" [routerLink]="routerLink"> -->
+<a *ngIf="routerLink" [class]="'button button--' + variant">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+</a>

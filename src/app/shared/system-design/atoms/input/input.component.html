@@ -1,0 +1,22 @@
+<label class="input">
+
+    <header *ngIf="label" class="input__label">
+        <span class="input__label-text">{{ label }}</span>
+        <span *ngIf="isRequired" class="input__required">*</span>
+    </header>
+
+    <div class="input__container" [ngClass]="{'input__container--error': showError}">
+        <input [attr.name]="name"  [formControl]="control" [placeholder]="placeholder" [type]="currentType"
+            [readonly]="readOnly" class="input__box" />
+
+        <button *ngIf="type === 'password'" type="button" class="input__toggle-password"
+            (click)="togglePasswordVisibility()">
+            <lucide-icon size="16" class="input__icon" *ngIf="!isPasswordVisible" name="eye"></lucide-icon>
+            <lucide-icon size="16" class="input__icon" *ngIf="isPasswordVisible" name="eye-off"></lucide-icon>
+        </button>
+    </div>
+
+    <footer *ngIf="showError" class="input__error" @errorMessage >
+        {{ control.errors | errorMessage }}
+    </footer>
+</label>

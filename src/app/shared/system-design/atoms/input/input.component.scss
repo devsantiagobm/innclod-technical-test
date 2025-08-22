@@ -1,0 +1,93 @@
+:host {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    flex: 1 1 100%;
+    flex: 1 1 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+
+    &__label {
+        font-weight: var(--font-weight-medium);
+        color: var(--neutral-700);
+        display: flex;
+        gap: 2px;
+        font-size: .9rem;
+    }
+
+    &__label-text {
+        text-wrap: nowrap;
+        max-width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    &__required {
+        color: var(--red-500);
+        user-select: none;
+    }
+
+    &__container {
+        position: relative;
+        border: solid 1px var(--neutral-300);
+        border-radius: 6px;
+        padding: 8px 12px;
+        cursor: text;
+        box-shadow: color-mix(in srgb, var(--neutral-500), transparent 0%) 0px 8px 24px -8px;
+        transition: border-color .2s ease, box-shadow .2s ease;
+
+        &:not(&--error):focus-within {
+            box-shadow: color-mix(in srgb, var(--neutral-300), transparent 20%) 0px 4px 24px -8px;
+            border-color: var(--neutral-500);
+        }
+
+        &--error {
+            box-shadow: color-mix(in srgb, var(--red-500), transparent 80%) 0px 4px 24px -8px;
+            border-color: var(--red-500);
+
+        }
+    }
+
+    &__box {
+        display: inline-block;
+        width: 100%;
+        font-weight: var(--font-weight-medium);
+
+        &::placeholder {
+            font-weight: var(--font-weight-regular);
+            font-size: .9rem;
+            color: var(--neutral-500);
+        }
+    }
+
+    &__toggle-password {
+        position: absolute;
+        right: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    &__error {
+        color: var(--red-500);
+        font-size: 0.8rem;
+        transform-origin: top;
+        font-weight: var(--font-weight-medium);
+    }
+
+    &__icon{
+        color: var(--neutral-500);
+    }
+}
