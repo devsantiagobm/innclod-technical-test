@@ -4,6 +4,7 @@ import { fadeInAnimation } from '@/shared/animations/fade-in.animation';
 import { Project } from '@/shared/models/project.model';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { toast } from 'ngx-sonner';
 
 @Component({
@@ -16,6 +17,7 @@ export class ProjectsListComponent implements OnInit {
     private authService = inject(AuthService)
     private projectsService = inject(ProjectsService)
     private formBuilder = inject(FormBuilder)
+    private router = inject(Router)
 
     public isLoading = false;
     public isLoadingRequest = false;
@@ -28,7 +30,6 @@ export class ProjectsListComponent implements OnInit {
     public deletingProjectId: number | null = null;
 
 
-    // TODO CUSTOM VALIDATORS
     form = this.formBuilder.group({
         title: ["", [Validators.required]],
         email: ["", [Validators.required, Validators.email]],
@@ -148,6 +149,24 @@ export class ProjectsListComponent implements OnInit {
                 this.isLoadingRequest = false;
             }
         });
+    }
+
+
+    public logout() {
+        const toastId = toast.loading('Cerrando sesión...');
+
+        this.authService.logout().subscribe({
+            next: (res) => {
+                this.router.navigate(['auth/login'])
+            },
+            error: (err) => {
+                toast.error(err.message || 'Error al cerrar sesión. Inténtalo de nuevo');
+            },
+            complete: () => {
+                toast.dismiss(toastId);
+                this.isLoadingRequest = false
+            },
+        })
     }
 
 }

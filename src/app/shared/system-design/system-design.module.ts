@@ -7,6 +7,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Eye, EyeOff, LucideAngularModule, X } from 'lucide-angular';
 import { ModalComponent } from './molecules/modal/modal.component';
+import { CheckboxComponent } from './atoms/checkbox/checkbox.component';
 
 
 
@@ -15,7 +16,8 @@ import { ModalComponent } from './molecules/modal/modal.component';
     ButtonComponent,
     InputComponent,
     LoaderComponent,
-    ModalComponent
+    ModalComponent,
+    CheckboxComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { ModalComponent } from './molecules/modal/modal.component';
     ButtonComponent,
     InputComponent,
     LoaderComponent,
-    ModalComponent
+    ModalComponent,
+    CheckboxComponent
   ]
 })
 export class SystemDesignModule { }

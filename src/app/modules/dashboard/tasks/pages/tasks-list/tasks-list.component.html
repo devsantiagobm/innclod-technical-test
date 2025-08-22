@@ -1,0 +1,100 @@
+<section class="tasks">
+
+    <header class="tasks__header" @fade-in>
+        <atom-button [fitContent]="true" variant="outline" routerLink="/dashboard/projects">
+            <lucide-icon size="18" name="arrow-left"></lucide-icon>
+            Regresar a los proyectos
+        </atom-button>
+
+        <div class="tasks__actions">
+            <atom-button variant="action" (click)="setFormState(true)">
+                <lucide-icon name="plus" size="16"></lucide-icon>
+                Nueva tarea
+            </atom-button>
+
+            <atom-button variant="danger" (click)="logout()">
+                Cerrar sesión
+            </atom-button>
+        </div>
+    </header>
+
+    <div class="tasks__loader" *ngIf="isLoading">
+        <atom-loader [size]="32"></atom-loader>
+    </div>
+
+    <section class="tasks__content" *ngIf="!isLoading" @fade-in>
+        <div class="tasks__project">
+            <h1 class="tasks__project-title">{{project?.name}}</h1>
+            <p class="tasks__project-description">{{project?.company?.catchPhrase}}</p>
+            <p class="tasks__project-description">Empresa: {{project?.company?.name}}</p>
+            <p class="tasks__project-description">Contacto: {{project?.email}} • {{project?.phone}}</p>
+        </div>
+
+        <hr class="tasks__divider">
+
+        <div class="tasks__tasks">
+            <header class="tasks__tasks-header">
+                <h2 class="tasks__tasks-title">Tareas</h2>
+                <p class="tasks__project-description">{{tasksStats.completed}} de {{tasksStats.length}} tareas
+                    completadas</p>
+            </header>
+
+            <section class="tasks__grid">
+                <article class="tasks__card" *ngFor="let task of tasks" @fade-in>
+
+                    <header class="tasks__card-header">
+                        <h2 class="tasks__card-row projects__card-title">
+                            <atom-checkbox [isChecked]="task.completed"></atom-checkbox>
+                            {{ task.title }}
+                        </h2>
+                    </header>
+
+                    <footer class="tasks__card-footer">
+                        <button class="tasks__card-button" (click)="setFormState(task.id)">
+                            <lucide-icon name="pencil" size="16"></lucide-icon>
+                        </button>
+
+                        <button class="tasks__card-button" (click)="setDeletingProjectId(task.id)">
+                            <lucide-icon name="trash" size="16"></lucide-icon>
+                        </button>
+                    </footer>
+                </article>
+            </section>
+        </div>
+    </section>
+
+    <molecule-modal [isVisible]="shouldShowForm" (close)="setFormState(null)">
+        <ng-container modal-title>{{formTexts.title}}</ng-container>
+        <ng-container modal-description> {{formTexts.description}} </ng-container>
+
+        <ng-container modal-body>
+            <form class="tasks__form" [formGroup]="form" (ngSubmit)="saveTask()">
+                <fieldset class="tasks__fieldset">
+                    <atom-input label="Título" name="title" placeholder="Título del proyecto"
+                        [control]="form.controls.title" type="text" [isRequired]="true">
+                    </atom-input>
+                </fieldset>
+
+                <atom-button variant="action" type="submit" [isLoading]="isLoadingRequest">
+                    Guardar Tarea
+                </atom-button>
+            </form>
+
+        </ng-container>
+    </molecule-modal>
+
+
+    <molecule-modal [isVisible]="shouldShowDeleteModal" (close)="setDeletingProjectId(null)">
+        <ng-container modal-title>¿Eliminar tarea?</ng-container>
+        <ng-container modal-description>
+            Esta acción no se puede deshacer. La tarea se eliminarán de forma permanente
+        </ng-container>
+
+        <ng-container modal-actions>
+            <atom-button variant="danger" (click)="deleteTask()" [isLoading]="isLoadingRequest">Eliminar
+                tarea</atom-button>
+            <atom-button variant="outline" [fitContent]="true"
+                (click)="setDeletingProjectId(null)">Cancelar</atom-button>
+        </ng-container>
+    </molecule-modal>
+</section>
